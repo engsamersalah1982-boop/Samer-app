@@ -1,0 +1,10 @@
+{
+  "name": "Remix Remix Remix JBC Operations Hub",
+  "description": "نظام إدارة العمليات والصيانة لشركة الغاز الحيوي الأردنية (Jordan Biogas Company) - إدارة المهام الميدانية، أوامر الصيانة، الأصول ومسح QR، الجداول الوقائية، الإجازات والأذونات، والأرشيف الفني",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

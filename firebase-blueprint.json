@@ -1,0 +1,130 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System user account for operations and maintenance personnel",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "nameAr": { "type": "string" },
+        "nameEn": { "type": "string" },
+        "role": { "type": "string" },
+        "jobTitleAr": { "type": "string" },
+        "department": { "type": "string" },
+        "phone": { "type": "string" },
+        "password": { "type": "string" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["id", "username", "nameAr", "role"]
+    },
+    "WorkOrder": {
+      "title": "WorkOrder",
+      "description": "Corrective, preventive, or emergency maintenance work order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "workOrderNumber": { "type": "string" },
+        "type": { "type": "string" },
+        "priority": { "type": "string" },
+        "status": { "type": "string" },
+        "equipmentId": { "type": "string" },
+        "createdById": { "type": "string" }
+      },
+      "required": ["id", "workOrderNumber", "type", "priority", "status"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Operational field task with checklist and status",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "titleAr": { "type": "string" },
+        "status": { "type": "string" },
+        "priority": { "type": "string" },
+        "assignedToId": { "type": "string" }
+      },
+      "required": ["id", "titleAr", "status", "priority"]
+    },
+    "Equipment": {
+      "title": "Equipment",
+      "description": "Plant asset or equipment record with QR and specs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nameAr": { "type": "string" },
+        "code": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "nameAr", "code", "status"]
+    },
+    "PlantReading": {
+      "title": "PlantReading",
+      "description": "Daily or hourly operational reading for biogas plant parameters",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "recordedById": { "type": "string" }
+      },
+      "required": ["id", "timestamp"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "System or task notification for users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "titleAr": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "titleAr", "createdAt"]
+    },
+    "SyncStoreDoc": {
+      "title": "SyncStoreDoc",
+      "description": "Cross-device synchronized data partition for operational and procurement modules",
+      "type": "object",
+      "properties": {
+        "data": { "type": "object" },
+        "updatedAt": { "type": "string" },
+        "device": { "type": "string" },
+        "clientTimestamp": { "type": "number" }
+      },
+      "required": ["data", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/sync_store/{storeName}": {
+      "schema": "SyncStoreDoc",
+      "description": "Real-time state synchronization store for Jordan Biogas Company modules"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "All system user credentials and profiles"
+    },
+    "/work_orders/{workOrderId}": {
+      "schema": "WorkOrder",
+      "description": "Maintenance work orders"
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Operational tasks and inspections"
+    },
+    "/equipment/{equipmentId}": {
+      "schema": "Equipment",
+      "description": "Plant assets and machinery"
+    },
+    "/plant_readings/{readingId}": {
+      "schema": "PlantReading",
+      "description": "Operational log readings"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "System alerts and notifications"
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "App settings and configuration"
+    }
+  }
+}
